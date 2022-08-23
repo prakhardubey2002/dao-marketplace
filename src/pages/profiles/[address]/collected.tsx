@@ -19,6 +19,7 @@ import { NftCard } from '../../../components/NftCard';
 import { List, ListGridSize } from './../../../components/List';
 import clsx from 'clsx';
 import { Nft } from '../../../types';
+import { useFetchDarkblocked } from '../../../hooks/useFetchDarkblocked';
 
 export async function getServerSideProps({ locale, params }: GetServerSidePropsContext) {
   const i18n = await serverSideTranslations(locale as string, ['common', 'profile']);
@@ -85,6 +86,9 @@ export default function ProfileCollected() {
     },
   });
 
+  const { data } = useFetchDarkblocked(router.query.address as string);
+  const [nftsDark, setNftsDark] = useState<any>([])
+
   useEffect(() => {
     const subscription = watch(({ listed }) => {
       let variables: CollectionNFTsVariables = {
@@ -104,6 +108,22 @@ export default function ProfileCollected() {
         setHasMore(collectedNfts.length > 0);
       });
     });
+
+    console.log(nftsQuery.data?.collectedNfts)
+    console.log(data)
+
+    const newArray = nftsQuery.data?.collectedNfts.map((item) => {
+      return { ...item, isDarkblocked: true }
+    })
+    setNftsDark(newArray)
+
+  // const nfts = actualOwnedNFTs.map((item) => {
+  //   const res: DarkblockRes | any = data?.find( (db: DarkblockRes) => db.token === item.mintAddress);
+  //   if(res) {
+  //     return {...item, is_darkblocked: res?.is_darkblocked }
+  //   }
+  //   return {...item, is_darkblocked: false }
+  // }).filter((item) => item?.owner?.address === pk);
 
     return subscription.unsubscribe;
   }, [watch, router.query.address, nftsQuery]);
@@ -135,7 +155,8 @@ export default function ProfileCollected() {
         <Sidebar.Content>
           <List
             expanded={open}
-            data={nftsQuery.data?.collectedNfts}
+            // data={nftsQuery.data?.collectedNfts}
+            data={nftsDark}
             loading={nftsQuery.loading}
             gap={4}
             hasMore={hasMore}

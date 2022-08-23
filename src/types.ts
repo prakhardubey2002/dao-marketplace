@@ -198,6 +198,7 @@ export interface Nft {
   collection?: Collection;
   createdAt?: string;
   parser?: string;
+  isDarkblocked?: boolean;
 }
 
 export interface AttributeFilter {

@@ -3,6 +3,7 @@ import { useTranslation } from 'next-i18next';
 import { ReactNode } from 'react';
 import { Nft } from '../types';
 import Button, { ButtonSize, ButtonType } from './Button';
+import { DarkblockBadge } from './DarkblockBadge';
 
 interface NftCardProps {
   nft: Nft;
@@ -16,15 +17,15 @@ export function NftCard({ nft }: NftCardProps): JSX.Element {
       <img
         src={nft.image}
         alt={`Nft image for ${nft.mintAddress}`}
-        className="aspect-square w-full object-cover"
+        className="object-cover w-full aspect-square"
       />
       <div className="p-4">
-        <div className="mb-4 flex h-6 flex-row items-center justify-start gap-2 text-white">
+        <div className="flex flex-row items-center justify-start h-6 gap-2 mb-4 text-white">
           {nft.collection && (
             <img
               src={nft.collection?.nft?.image}
               alt={`Collection NFT image ${nft.collection?.nft.mintAddress}`}
-              className="aspect-square w-6 rounded-sm object-cover"
+              className="object-cover w-6 rounded-sm aspect-square"
             />
           )}
           <span className="truncate">{nft.name}</span>
@@ -35,6 +36,11 @@ export function NftCard({ nft }: NftCardProps): JSX.Element {
             {t('buy')}
           </Button>
         </div>
+        {
+          nft.isDarkblocked && (
+            <DarkblockBadge />
+          )
+        }
       </div>
     </div>
   );
@@ -53,15 +59,15 @@ function NftCardSkeleton({ className }: NftCardSkeletonProps) {
         className
       )}
     >
-      <div className="aspect-square w-full bg-gray-800 object-cover" />
+      <div className="object-cover w-full bg-gray-800 aspect-square" />
       <div className="p-4">
-        <div className="mb-4 flex flex-row items-center justify-start gap-2 text-white">
-          <div className="aspect-square w-6 rounded-sm bg-gray-800 object-cover" />
-          <span className="h-4 w-20 truncate rounded-md bg-gray-800" />
+        <div className="flex flex-row items-center justify-start gap-2 mb-4 text-white">
+          <div className="object-cover w-6 bg-gray-800 rounded-sm aspect-square" />
+          <span className="w-20 h-4 truncate bg-gray-800 rounded-md" />
         </div>
         <div className="flex flex-row items-center justify-between">
-          <span className="h-6 w-16 rounded-md bg-gray-800" />
-          <div className="h-8 w-16 rounded-full bg-gray-800" />
+          <span className="w-16 h-6 bg-gray-800 rounded-md" />
+          <div className="w-16 h-8 bg-gray-800 rounded-full" />
         </div>
       </div>
     </div>
