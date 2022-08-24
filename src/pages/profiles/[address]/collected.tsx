@@ -113,7 +113,11 @@ export default function ProfileCollected() {
     console.log(data)
 
     const newArray = nftsQuery.data?.collectedNfts.map((item) => {
-      return { ...item, isDarkblocked: true }
+      const res = data?.find( (db) => db.token === item.mintAddress);
+      if(res) {
+        return {...item, isDarkblocked: res?.is_darkblocked }
+      }
+      return {...item, isDarkblocked: false }
     })
     setNftsDark(newArray)
 

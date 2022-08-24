@@ -14,11 +14,18 @@ export function NftCard({ nft }: NftCardProps): JSX.Element {
 
   return (
     <div className="overflow-clip rounded-lg text-white shadow-lg transition hover:scale-[1.02]">
-      <img
-        src={nft.image}
-        alt={`Nft image for ${nft.mintAddress}`}
-        className="object-cover w-full aspect-square"
-      />
+      <div className="relative">
+        <img
+          src={nft.image}
+          alt={`Nft image for ${nft.mintAddress}`}
+          className="object-cover w-full aspect-square"
+        />
+        { nft.isDarkblocked && (
+          <div className='absolute left-2 top-2'>
+            <DarkblockBadge />
+          </div>
+        )}
+      </div>
       <div className="p-4">
         <div className="flex flex-row items-center justify-start h-6 gap-2 mb-4 text-white">
           {nft.collection && (
@@ -36,11 +43,6 @@ export function NftCard({ nft }: NftCardProps): JSX.Element {
             {t('buy')}
           </Button>
         </div>
-        {
-          nft.isDarkblocked && (
-            <DarkblockBadge />
-          )
-        }
       </div>
     </div>
   );
