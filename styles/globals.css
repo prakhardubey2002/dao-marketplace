@@ -3,12 +3,12 @@
 @import 'swiper/css';
 @import 'swiper/css/navigation';
 @import 'swiper/css/grid';
+/* @import './darkblock.less'; */
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @tailwind variants;
-@import './darkblock.less';
 
 h1,
 h2,
