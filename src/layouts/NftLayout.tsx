@@ -7,22 +7,8 @@ import { ButtonGroup } from './../components/ButtonGroup';
 import Button, { ButtonSize, ButtonType } from './../components/Button';
 import { UploadIcon } from '@heroicons/react/outline';
 import Head from 'next/head';
-import dynamic from 'next/dynamic';
 import { useFetchDarkblocked } from '../hooks/useFetchDarkblocked';
-const SolanaDarkblockWidget: any = dynamic(() => import('@darkblock.io/sol-widget'), {
-  ssr: false,
-});
-
-const config = {
-  customCssClass: 'darkblock-css', // pass here a class name you plan to use
-  debug: false, // debug flag to console.log some variables
-  imgViewer: {
-    // image viewer control parameters
-    showRotationControl: true,
-    autoHideControls: true,
-    controlsFadeDelay: true,
-  },
-};
+import SolWidget from '../components/SolWidget';
 
 interface NftLayoutProps {
   children: ReactNode;
@@ -82,12 +68,8 @@ export default function NftLayout({ children, nft }: NftLayoutProps) {
               {t('bid')}
             </Button>
           </div>
-          <div className="mt-10 flex flex-row items-center justify-between rounded-lg bg-gradient-radial from-gray-900 to-gray-800 p-4">
-              <SolanaDarkblockWidget
-                tokenId={nft?.mintAddress}
-                walletAdapter={null}
-                config={config}
-              />
+          <div className="mt-10 rounded-lg bg-gradient-radial from-gray-900 to-gray-800 p-4">
+            <SolWidget id={nft?.mintAddress} upgrade={false} />
           </div>
         </div>
       </div>
