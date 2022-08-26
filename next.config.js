@@ -6,10 +6,10 @@ const { i18n } = require('./next-i18next.config');
 const withGraphql = require('next-plugin-graphql');
 
 const securityHeaders = [
-  // {
-  //   key: 'Referrer-Policy',
-  //   value: 'same-origin'
-  // }
+  {
+    key: 'Referrer-Policy',
+    value: 'same-origin'
+  }
 ]
 
 /** @type {import('next').NextConfig} */
@@ -29,15 +29,15 @@ const nextConfig = {
       // },
     ]
   },
-  // async headers() {
-  //   return [
-  //     {
-  //       // Apply these headers to all routes in your application.
-  //       source: '/nfts/:path*/details',
-  //       headers: securityHeaders,
-  //     },
-  //   ]
-  // }
+  async headers() {
+    return [
+      {
+        // Apply these headers to all routes in your application.
+        source: '/nfts/:path*/details',
+        headers: securityHeaders,
+      },
+    ]
+  }
 };
 
 module.exports = withGraphql(nextConfig);
