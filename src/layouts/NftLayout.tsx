@@ -69,6 +69,9 @@ export default function NftLayout({ children, nft }: NftLayoutProps) {
             </Button>
           </div>
           <div className="mt-10 rounded-lg bg-gradient-radial from-gray-900 to-gray-800 p-4">
+            <div className='pb-4 flex justify-end'>
+              <SolWidget id={nft?.mintAddress} upgrade={true} />
+            </div>
             <SolWidget id={nft?.mintAddress} upgrade={false} />
           </div>
         </div>

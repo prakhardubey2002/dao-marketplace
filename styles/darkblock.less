@@ -2,15 +2,21 @@
   @apply bg-gray-800 font-sans text-white;
 
   .DarkblockWidget-Header {
-    @apply bg-gray-800;
+    @apply bg-gray-800 shadow-none;
+
+
 
     .DarkblockWidget-Header-Row {
       .content {
         display: none;
       }
 
+      .authButton {
+        @apply bg-gray-900;
+      }
+
       .inner-button {
-        @apply h-12 max-h-12 rounded-full border-transparent bg-white px-6 py-1 text-black;
+        @apply h-12 max-h-12 border-transparent bg-gray-900 text-white px-6 py-1;
       }
 
       .title-red {
@@ -22,8 +28,16 @@
   .DarkblockWidget-Stack-Panel {
     @apply bg-gray-900;
 
+    .rowheader {
+      @apply bg-gray-800;
+    }
+
+    .toggleBtn {
+      @apply bg-red-500;
+    }
+
     .row {
-      @apply hover:bg-gray-700;
+      @apply hover:bg-gray-600;
     }
 
     .selected {
@@ -52,4 +66,8 @@
       @apply fill-gray-500;
     }
   }
+}
+
+.upgrade-add-content {
+  @apply bg-red-500;
 }

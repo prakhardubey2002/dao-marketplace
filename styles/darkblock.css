@@ -1,0 +1,51 @@
+.darkblock-css {
+  @apply bg-gray-800 font-sans text-white;
+}
+.darkblock-css .DarkblockWidget-Header {
+  @apply bg-gray-800 shadow-none;
+}
+.darkblock-css .DarkblockWidget-Header .DarkblockWidget-Header-Row .content {
+  display: none;
+}
+.darkblock-css .DarkblockWidget-Header .DarkblockWidget-Header-Row .authButton {
+  @apply bg-gray-900;
+}
+.darkblock-css .DarkblockWidget-Header .DarkblockWidget-Header-Row .inner-button {
+  @apply h-12 max-h-12 border-transparent bg-gray-900 text-white px-6 py-1;
+}
+.darkblock-css .DarkblockWidget-Header .DarkblockWidget-Header-Row .title-red {
+  @apply text-white text-base;
+}
+.darkblock-css .DarkblockWidget-Stack-Panel {
+  @apply bg-gray-900;
+}
+.darkblock-css .DarkblockWidget-Stack-Panel .rowheader {
+  @apply bg-gray-800;
+}
+.darkblock-css .DarkblockWidget-Stack-Panel .toggleBtn {
+  @apply bg-red-500;
+}
+.darkblock-css .DarkblockWidget-Stack-Panel .row {
+  @apply hover:bg-gray-600;
+}
+.darkblock-css .DarkblockWidget-Stack-Panel .selected {
+  @apply bg-gray-700;
+}
+.darkblock-css .DarkblockWidget-Stack-Panel .fileRow:hover {
+  @apply bg-gray-700;
+}
+.darkblock-css .DarkblockWidget-Stack-Panel .stack-table td {
+  @apply bg-gray-800 text-gray-300;
+}
+.darkblock-css .DarkblockWidget-Footer {
+  @apply pt-5 text-xs text-gray-500;
+}
+.darkblock-css .DarkblockWidget-Footer svg {
+  @apply stroke-gray-500;
+}
+.darkblock-css .DarkblockWidget-Footer svg path {
+  @apply fill-gray-500;
+}
+.upgrade-add-content {
+  @apply bg-red-500;
+}
