@@ -41,7 +41,7 @@ const cbUpgrade = (param1) => {
   }
 }
 
-const apiKey = 'dgtqh26mv8mtgemq4tys47d4a2ax'
+const apiKey = '2jqkys7jg94gk0hwpwjg9e1psnft'
 
 const SolWidget = ({ id, upgrade = false }) => {
   const walletAdapter = useWallet()
