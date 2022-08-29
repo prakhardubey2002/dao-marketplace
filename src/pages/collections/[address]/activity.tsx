@@ -1,5 +1,6 @@
 import type { GetServerSidePropsContext } from 'next';
 import { ReactElement, useEffect, useState, useMemo, SVGProps, ReactNode } from 'react';
+// @ts-ignore
 import { CollectionQuery, CollectionActivitiesQuery } from './../../../queries/collection.graphql';
 import CollectionLayout from '../../../layouts/CollectionLayout';
 import client from '../../../client';

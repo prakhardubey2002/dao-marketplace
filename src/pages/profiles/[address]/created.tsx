@@ -1,4 +1,5 @@
 import type { GetServerSidePropsContext, GetStaticPropsContext } from 'next';
+// @ts-ignore
 import { WalletProfileQuery, CreatedNFTsQuery } from './../../../queries/profile.graphql';
 import ProfileLayout from '../../../layouts/ProfileLayout';
 import client from '../../../client';
