@@ -110,9 +110,6 @@ export default function ProfileCollected() {
       });
     });
 
-    console.log(nftsQuery.data?.collectedNfts)
-    console.log(data)
-
     const newArray = nftsQuery.data?.collectedNfts.map((item) => {
       const res = data?.find( (db) => db.token === item.mintAddress);
       if(res) {
@@ -121,14 +118,6 @@ export default function ProfileCollected() {
       return {...item, isDarkblocked: false }
     })
     setNftsDark(newArray)
-
-  // const nfts = actualOwnedNFTs.map((item) => {
-  //   const res: DarkblockRes | any = data?.find( (db: DarkblockRes) => db.token === item.mintAddress);
-  //   if(res) {
-  //     return {...item, is_darkblocked: res?.is_darkblocked }
-  //   }
-  //   return {...item, is_darkblocked: false }
-  // }).filter((item) => item?.owner?.address === pk);
 
     return subscription.unsubscribe;
   }, [watch, router.query.address, nftsQuery]);

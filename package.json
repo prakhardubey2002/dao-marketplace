@@ -24,7 +24,7 @@
     "@solana/wallet-adapter-react-ui": "^0.9.12",
     "@solana/wallet-adapter-wallets": "^0.17.1",
     "@solana/web3.js": "^1.50.1",
-    "antd": "^4.22.7",
+    "@tippyjs/react": "^4.2.6",
     "bn.js": "^5.2.1",
     "clsx": "^1.2.1",
     "date-fns": "^2.29.1",
