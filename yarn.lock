@@ -1259,10 +1259,10 @@
   resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-3.4.1.tgz#75b4c27948c81e88ccd3a8902047bcd797f38d32"
   integrity sha512-ej5oVy6lykXsvieQtqZxCOaLT+xD4+QNarq78cIYISHmZXshCvROLudpQN3lfL8G0NL7plMSSK+zlyvCaIJ4Iw==
 
-"@darkblock.io/sol-widget@^0.2.9":
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/@darkblock.io/sol-widget/-/sol-widget-0.2.9.tgz#1124649846695bbbb581c765a148867a54fc807b"
-  integrity sha512-/jWKr5JHVmzM3rjRH3PwjrhPoGAxQITOu/T1K8Ytt6yIIuPve31UuBovvTxQfutgJEDiLDp7P+6+TP3n/dX8Gg==
+"@darkblock.io/sol-widget@^0.2.10":
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/@darkblock.io/sol-widget/-/sol-widget-0.2.10.tgz#4fed2fbdba1696404710d5e3e04c30d8d0e9dd82"
+  integrity sha512-KngGWgKAtNhimVBicqPxb7+vzLucqqplp6By1l1XWqaIiGYU33vqgC7kNFanNwndR9aLR7PZlpWwEgXF3WtX0A==
   dependencies:
     "@xstate/react" "^2.0.0"
     base64-arraybuffer "^1.0.2"
