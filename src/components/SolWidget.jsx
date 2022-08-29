@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { useWallet } from '@solana/wallet-adapter-react'
-import Router from 'next/router'
 
 const config = {
   customCssClass: 'darkblock-css', // pass here a class name you plan to use
