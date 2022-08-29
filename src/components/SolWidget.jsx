@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { useWallet } from '@solana/wallet-adapter-react'
+import {SolUpgradeWidget} from '@darkblock.io/sol-widget'
 
 const config = {
   customCssClass: 'darkblock-css', // pass here a class name you plan to use
@@ -21,13 +22,13 @@ const SolanaDarkblockWidget = dynamic(
   { ssr: false }
 )
 
-const SolUpgradeWidget = dynamic(
-  () =>
-    import('@darkblock.io/sol-widget').then((mod) => {
-      return mod.SolUpgradeWidget
-    }),
-  { ssr: false }
-)
+// const SolUpgradeWidget = dynamic(
+//   () =>
+//     import('@darkblock.io/sol-widget').then((mod) => {
+//       return mod.SolUpgradeWidget
+//     }),
+//   { ssr: false }
+// )
 
 const cb = (param1) => {
   // console.log('solWidget cb:', param1)
@@ -47,6 +48,7 @@ const SolWidget = ({ id, upgrade = false }) => {
   const [wallectConnected, setWalletConnected] = useState(false)
   useEffect(() => {
     if (walletAdapter.connected) {
+      console.log('wallet connected')
       setWalletConnected(true)
     }
   }, [walletAdapter.connected])
