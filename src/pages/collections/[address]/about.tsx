@@ -1,6 +1,7 @@
 import { ReactElement } from 'react';
 import CollectionLayout from '../../../layouts/CollectionLayout';
 import { Collection, NftCreator } from '../../../types';
+// @ts-ignore
 import { CollectionQuery } from './../../../queries/collection.graphql';
 import { useTranslation } from 'next-i18next';
 import { addressAvatar, shortenAddress } from '../../../modules/address';

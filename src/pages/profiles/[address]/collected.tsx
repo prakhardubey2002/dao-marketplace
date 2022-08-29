@@ -1,4 +1,5 @@
 import type { GetServerSidePropsContext, GetStaticPropsContext } from 'next';
+// @ts-ignore
 import { WalletProfileQuery, CollectedNFTsQuery } from './../../../queries/profile.graphql';
 import ProfileLayout from '../../../layouts/ProfileLayout';
 import client from './../../../client';
@@ -189,7 +190,7 @@ export default function ProfileCollected() {
 
               setHasMore(collectedNfts.length > 0);
             }}
-            render={(nft, i) => (
+            render={(nft: any, i) => (
               <Link
                 href={`/nfts/${nft.mintAddress}/details`}
                 key={`${nft.mintAddress}-${i}`}
