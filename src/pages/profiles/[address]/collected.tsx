@@ -90,6 +90,14 @@ export default function ProfileCollected() {
   const { data } = useFetchDarkblocked(router.query.address as string);
   const [nftsDark, setNftsDark] = useState<any>([])
 
+  const addDarkblockFlag = (item: any) => {
+    const res = data?.find( (db) => db.token === item.mintAddress);
+    if(res) {
+      return {...item, isDarkblocked: res?.is_darkblocked }
+    }
+    return {...item, isDarkblocked: false }
+  }
+
   useEffect(() => {
     const subscription = watch(({ listed }) => {
       let variables: CollectionNFTsVariables = {
@@ -109,14 +117,7 @@ export default function ProfileCollected() {
         setHasMore(collectedNfts.length > 0);
       });
     });
-
-    const newArray = nftsQuery.data?.collectedNfts.map((item) => {
-      const res = data?.find( (db) => db.token === item.mintAddress);
-      if(res) {
-        return {...item, isDarkblocked: res?.is_darkblocked }
-      }
-      return {...item, isDarkblocked: false }
-    })
+    const newArray = nftsQuery.data?.collectedNfts.map(addDarkblockFlag);
     setNftsDark(newArray)
 
     return subscription.unsubscribe;
@@ -167,7 +168,6 @@ export default function ProfileCollected() {
               if (!inView) {
                 return;
               }
-
               const {
                 data: { collectedNfts },
               } = await nftsQuery.fetchMore({
@@ -176,7 +176,6 @@ export default function ProfileCollected() {
                   offset: nftsQuery.data?.collectedNfts.length,
                 },
               });
-
               setHasMore(collectedNfts.length > 0);
             }}
             render={(nft: any, i) => (
