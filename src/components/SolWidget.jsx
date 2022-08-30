@@ -47,24 +47,23 @@ const SolWidget = ({ id, upgrade = false }) => {
   const [wallectConnected, setWalletConnected] = useState(false)
   useEffect(() => {
     if (walletAdapter.connected) {
-      console.log('wallet Sconnected')
+      console.log('wallet connected')
       setWalletConnected(true)
     }
   }, [walletAdapter.connected])
 
   if (walletAdapter && wallectConnected) {
     if (upgrade) {
-      console.log('upgrade',upgrade)
       return (
         <SolUpgradeWidget apiKey={apiKey} tokenId={id} walletAdapter={walletAdapter} cb={cbUpgrade} config={config} />
       )
     } else {
-      console.log('else is here')
       return (
         <SolanaDarkblockWidget cb={(state) => cb(state)} tokenId={id} walletAdapter={walletAdapter} config={config} />
       )
     }
   } else {
+    console.log('else is here',walletAdapter,wallectConnected)
     return <></>
   }
 }
