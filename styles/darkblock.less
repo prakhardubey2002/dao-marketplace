@@ -68,6 +68,41 @@
   }
 }
 
-.upgrade-add-content {
-  @apply bg-red-500;
+#upgrade-modal-box {
+  @apply bg-gray-800 text-white;
+
+  .upgrade-form {
+    @apply bg-gray-800 text-white;
+
+    .fileupload-container {
+      .fileupload-header-supported {
+        color: white;
+      }
+
+      .fileupload-formats {
+        @apply text-gray-300;
+      }
+
+      .fileupload-info {
+        @apply text-gray-300 mt-2;
+      }
+
+      .fileupload-input-container {
+        @apply bg-gray-600;
+
+        .fileupload-button {
+          @apply text-white;
+        }
+      }
+    }
+
+    .downloadable-text {
+      @apply text-gray-300;
+    }
+
+    .upgrade-create-button {
+      @apply bg-white text-black;
+
+    }
+  }
 }
