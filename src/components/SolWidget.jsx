@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { useWallet } from '@solana/wallet-adapter-react'
 
 const config = {
-  customCssClass: 'darkblock-css', // pass here a class name you plan to use
+  customCssClass: '', // pass here a class name you plan to use
   debug: false, // debug flag to console.log some variables
   imgViewer: {
     // image viewer control parameters
@@ -45,6 +45,7 @@ const apiKey = '2jqkys7jg94gk0hwpwjg9e1psnft'
 const SolWidget = ({ id, upgrade = false }) => {
   const walletAdapter = useWallet()
   const [wallectConnected, setWalletConnected] = useState(false)
+
   useEffect(() => {
     if (walletAdapter.connected) {
       console.log('wallet connected')
@@ -52,7 +53,14 @@ const SolWidget = ({ id, upgrade = false }) => {
     }
   }, [walletAdapter.connected])
 
-  if (walletAdapter && wallectConnected) {
+  if (walletAdapter) {
+
+    console.log('-=-=- SolWidget -=-=-')
+    console.log('apiKey', apiKey)
+    console.log('id', id)
+    console.log('walletAdapter', walletAdapter)
+    console.log('upgrade', upgrade)
+
     if (upgrade) {
       return (
         <SolUpgradeWidget apiKey={apiKey} tokenId={id} walletAdapter={walletAdapter} cb={cbUpgrade} config={config} />
