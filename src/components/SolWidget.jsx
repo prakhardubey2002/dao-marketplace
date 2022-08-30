@@ -47,7 +47,7 @@ const SolWidget = ({ id, upgrade = false }) => {
   const [wallectConnected, setWalletConnected] = useState(false)
   useEffect(() => {
     if (walletAdapter.connected) {
-      console.log('connected')
+      console.log('wallet Sconnected')
       setWalletConnected(true)
     }
   }, [walletAdapter.connected])
