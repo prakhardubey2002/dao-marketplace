@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { Tooltip } from 'antd';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/dist/tippy.css';
 
 const text =
 `This NFT includes locked
@@ -8,17 +9,8 @@ Darkblock`;
 
 export const DarkblockBadge: FC = () => {
   return (
-    <Tooltip
-      placement="top"
-      mouseEnterDelay={0.09}
-      overlayStyle={{
-        fontSize: '0.75rem',
-        fontWeight: 600,
-        color: 'white',
-      }}
-      title={text}>
+    <Tippy content={<span>{text}</span>}>
       <div
-        data-tooltip-target="tooltip-default"
         className='flex items-center justify-around h-6 px-2 text-xs font-medium bg-gray-900 bg-opacity-50 rounded-full '
         style={{backdropFilter: 'blur(10px)'}}>
         <img
@@ -28,6 +20,6 @@ export const DarkblockBadge: FC = () => {
         />
         Darkblock
       </div>
-    </Tooltip>
+    </Tippy>
   )
 }

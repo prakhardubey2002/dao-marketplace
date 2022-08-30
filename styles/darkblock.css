@@ -46,6 +46,30 @@
 .darkblock-css .DarkblockWidget-Footer svg path {
   @apply fill-gray-500;
 }
-.upgrade-add-content {
-  @apply bg-red-500;
+#upgrade-modal-box {
+  @apply bg-gray-800 text-white;
+}
+#upgrade-modal-box .upgrade-form {
+  @apply bg-gray-800 text-white;
+}
+#upgrade-modal-box .upgrade-form .fileupload-container .fileupload-header-supported {
+  color: white;
+}
+#upgrade-modal-box .upgrade-form .fileupload-container .fileupload-formats {
+  @apply text-gray-300;
+}
+#upgrade-modal-box .upgrade-form .fileupload-container .fileupload-info {
+  @apply text-gray-300 mt-2;
+}
+#upgrade-modal-box .upgrade-form .fileupload-container .fileupload-input-container {
+  @apply bg-gray-600;
+}
+#upgrade-modal-box .upgrade-form .fileupload-container .fileupload-input-container .fileupload-button {
+  @apply text-white;
+}
+#upgrade-modal-box .upgrade-form .downloadable-text {
+  @apply text-gray-300;
+}
+#upgrade-modal-box .upgrade-form .upgrade-create-button {
+  @apply bg-white text-black;
 }
