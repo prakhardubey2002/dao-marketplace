@@ -4,9 +4,8 @@ import BN from 'bn.js';
 import { viewerVar } from './cache';
 import config from './app.config';
 import { isPublicKey, shortenAddress, addressAvatar } from './modules/address';
-import { toSol } from './modules/sol';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
-import { ConnectionCounts, WalletNftCount, TwitterProfile } from './types';
+import { ConnectionCounts, TwitterProfile } from './types';
 import { ReadFieldFunction } from '@apollo/client/cache/core/types/common';
 
 function asBN(value: string | null): BN {
@@ -14,16 +13,6 @@ function asBN(value: string | null): BN {
     return new BN(0);
   }
   return new BN(value);
-}
-
-function asSOL(_: any, { readField }: { readField: ReadFieldFunction }): number {
-  const price: BN | undefined = readField('price');
-
-  if (!price) {
-    return 0;
-  }
-
-  return toSol(price.toNumber());
 }
 
 function asDisplayName(_: any, { readField }: { readField: ReadFieldFunction }): string {
@@ -65,12 +54,6 @@ function asShortAddress(_: any, { readField }: { readField: ReadFieldFunction })
   return shortenAddress(address);
 }
 
-function asShortMintAddress(_: any, { readField }: { readField: ReadFieldFunction }): string {
-  const address: string | undefined = readField('mintAddress');
-
-  return shortenAddress(address);
-}
-
 function asNFTImage(image: string, { readField }: { readField: ReadFieldFunction }): string {
   const address: string | undefined = readField('mintAddress');
 
@@ -94,24 +77,10 @@ const typeDefs = gql`
     balance: Number
   }
 
-  extend type Marketplace {
-    fee: number
-  }
-
-  extend type Nft {
-    shortAddress: String
-    shortMintAddress: String
-    royalties: number
-  }
-
   extend type Collection {
     totalVolume: String
     listedCount: Number
     holderCount: Number
-  }
-
-  extend type NftActivity {
-    solPrice: Number
   }
 
   extend type Wallet {
@@ -121,8 +90,6 @@ const typeDefs = gql`
     shortAddress: string
     compactFollowingCount: string
     compactFollowerCount: string
-    compactOwnedCount: string
-    compactCreatedCount: string
     portfolioValue: number
   }
 
@@ -153,7 +120,7 @@ const client = new ApolloClient({
               return null;
             },
           },
-          nfts: offsetLimitPagination(['$listed', '$collection', '$owner', '$creator']),
+          nfts: offsetLimitPagination(),
           viewer: {
             read() {
               return viewerVar();
@@ -189,9 +156,9 @@ const client = new ApolloClient({
                 return asCompactNumber(0);
               }
 
-              const { fromCount } = connectionCounts;
+              const { toCount } = connectionCounts;
 
-              return asCompactNumber(fromCount);
+              return asCompactNumber(toCount);
             },
           },
           compactFollowerCount: {
@@ -202,35 +169,9 @@ const client = new ApolloClient({
                 return asCompactNumber(0);
               }
 
-              const { toCount } = connectionCounts;
+              const { fromCount } = connectionCounts;
 
-              return asCompactNumber(toCount);
-            },
-          },
-          compactOwnedCount: {
-            read(_, { readField }) {
-              const nftCounts: WalletNftCount | undefined = readField('nftCounts');
-
-              if (!nftCounts) {
-                return asCompactNumber(0);
-              }
-
-              const { owned } = nftCounts;
-
-              return asCompactNumber(owned);
-            },
-          },
-          compactCreatedCount: {
-            read(_, { readField }) {
-              const nftCounts: WalletNftCount | undefined = readField('nftCounts');
-
-              if (!nftCounts) {
-                return asCompactNumber(0);
-              }
-
-              const { created } = nftCounts;
-
-              return asCompactNumber(created);
+              return asCompactNumber(fromCount);
             },
           },
         },
@@ -255,29 +196,42 @@ const client = new ApolloClient({
       Collection: {
         fields: {
           floorPrice: {
-            read(value): string {
+            read(value) {
               const lamports = asBN(value);
 
               return (lamports.toNumber() / LAMPORTS_PER_SOL).toFixed(1);
             },
           },
-          activities: offsetLimitPagination(['$eventTypes']),
           nftCount: {
-            read: asCompactNumber,
+            read(value) {
+              return new Intl.NumberFormat('en-GB', {
+                notation: 'compact',
+                compactDisplay: 'short',
+              }).format(value);
+            },
           },
           totalVolume: {
             read(_) {
-              return asCompactNumber(1800000);
+              return new Intl.NumberFormat('en-GB', {
+                notation: 'compact',
+                compactDisplay: 'short',
+              }).format(1800000);
             },
           },
           listedCount: {
             read(_) {
-              return asCompactNumber(1400);
+              return new Intl.NumberFormat('en-GB', {
+                notation: 'compact',
+                compactDisplay: 'short',
+              }).format(1400);
             },
           },
           holderCount: {
             read(_) {
-              return asCompactNumber(6250);
+              return new Intl.NumberFormat('en-GB', {
+                notation: 'compact',
+                compactDisplay: 'short',
+              }).format(6250);
             },
           },
         },
@@ -309,7 +263,7 @@ const client = new ApolloClient({
         keyFields: ['creatorAddress', 'storeConfigAddress'],
       },
       Marketplace: {
-        keyFields: ['configAddress'],
+        keyFields: ['ownerAddress'],
       },
       MetadataJson: {
         keyFields: ['address'],
@@ -318,7 +272,7 @@ const client = new ApolloClient({
             read: asNFTImage,
           },
           creatorDisplayName: {
-            read(_, { readField }): string | null {
+            read(_, { readField }) {
               const handle: string | undefined = readField('creatorTwitterHandle');
               const address: string | undefined = readField('creatorAddress');
 
@@ -336,27 +290,10 @@ const client = new ApolloClient({
         },
       },
       Nft: {
-        keyFields: ['mintAddress'],
+        keyFields: ['address'],
         fields: {
-          shortMintAddress: {
-            read: asShortMintAddress,
-          },
-          shortAddress: {
-            read: asShortAddress,
-          },
           image: {
             read: asNFTImage,
-          },
-          royalties: {
-            read(_, { readField }): number {
-              const sellerFeeBasisPoints: number | undefined = readField('sellerFeeBasisPoints');
-
-              if (!sellerFeeBasisPoints) {
-                return 0;
-              }
-
-              return sellerFeeBasisPoints / 100;
-            },
           },
         },
       },
@@ -365,20 +302,6 @@ const client = new ApolloClient({
       },
       NftOwner: {
         keyFields: ['address'],
-        fields: {
-          displayName: {
-            read: asDisplayName,
-          },
-          previewImage: {
-            read: asPreviewImage,
-          },
-          shortAddress: {
-            read: asShortAddress,
-          },
-          previewBanner: {
-            read: asPreviewBanner,
-          },
-        },
       },
       Purchase: {
         keyFields: ['id'],
@@ -402,9 +325,6 @@ const client = new ApolloClient({
           price: {
             read: asBN,
           },
-          solPrice: {
-            read: asSOL,
-          },
         },
       },
       Offer: {
@@ -412,22 +332,6 @@ const client = new ApolloClient({
         fields: {
           price: {
             read: asBN,
-          },
-        },
-      },
-      AuctionHouse: {
-        keyFields: ['address'],
-        fields: {
-          fee: {
-            read(_, { readField }): number {
-              const sellerFeeBasisPoints: number | undefined = readField('sellerFeeBasisPoints');
-
-              if (!sellerFeeBasisPoints) {
-                return 0;
-              }
-
-              return sellerFeeBasisPoints / 100;
-            },
           },
         },
       },

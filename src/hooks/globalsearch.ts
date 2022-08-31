@@ -13,7 +13,7 @@ export interface GlobalSearchData {
 
 type OnUpdateSearch = (event: React.ChangeEvent<HTMLInputElement>) => void;
 
-interface GlobalSearchContext {
+interface UseGlobalState {
   searchTerm: string;
   hasResults: boolean;
   updateSearch: OnUpdateSearch;
@@ -24,7 +24,7 @@ interface GlobalSearchContext {
   ) => Promise<ApolloQueryResult<GlobalSearchData>>;
 }
 
-export default function useGlobalSearch(): GlobalSearchContext {
+export default function useGlobalSearch(): UseGlobalState {
   const [searchTerm, setSearchTerm] = useState<string>('');
 
   const [searchQuery, { data, loading, called, variables, refetch }] =

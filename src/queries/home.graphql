@@ -1,4 +1,4 @@
-#import "./fragments/profile.graphql"
+#import "./fragments/ProfileInfo.graphql"
 
 query HomePageQuery($startDate: DateTimeUtc!, $endDate: DateTimeUtc!, $userWallet: PublicKey) {
   collectionsFeaturedByVolume(
@@ -42,8 +42,6 @@ query HomePageQuery($startDate: DateTimeUtc!, $endDate: DateTimeUtc!, $userWalle
     previewBanner @client
     compactFollowerCount @client
     compactFollowingCount @client
-    compactOwnedCount @client
-    compactCreatedCount @client
     connectionCounts {
       toCount
       fromCount
