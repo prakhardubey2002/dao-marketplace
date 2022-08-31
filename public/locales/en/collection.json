@@ -7,12 +7,17 @@
     "count": "{{amount}} NFTs"
   },
   "supply": "Supply",
+  "all": "All",
   "listings": "Listings",
+  "offers": "Offers",
+  "sales": "Sales",
   "holders": "Holders",
   "floor": "Floor Price",
   "volume": "Total Volume",
   "nfts": "NFTs",
   "activity": "Activity",
   "analytics": "Analytics",
-  "about": "About"
+  "about": "About",
+  "descriptionTitle": "About this collection",
+  "creatorsTitle": "Creators"
 }

@@ -3,7 +3,13 @@
     "title": "NightMarket"
   },
   "follow": "Follow",
+  "unfollow": "Unfollow",
   "connect": "Connect",
+  "filters": "Filters",
+  "buy": "Buy",
+  "all": "All",
+  "listed": "Listed",
+  "unlisted": "Unlisted",
   "search": {
     "collection": "Collection",
     "profiles": "Profiles",
@@ -11,5 +17,10 @@
     "nfts": "NFTs",
     "placeholder": "Search collections, profiles, and wallets...",
     "empty": "No results found"
+  },
+  "activity": {
+    "purchase": "Sold",
+    "listing": "Listed",
+    "offer": "Offer"
   }
 }

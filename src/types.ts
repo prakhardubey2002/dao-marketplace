@@ -11,41 +11,10 @@ interface CreatorCounts {
   creations: number;
 }
 
-export interface MarktetplaceMetaPayload {
-  name: string;
-  description: string;
-}
-
 export interface FileUploadPayload {
   name: string | undefined;
   type: string | undefined;
   url: string;
-}
-
-export interface MarketplaceThemePayload {
-  logo: FileUploadPayload;
-  banner: FileUploadPayload;
-}
-
-export interface MarketplaceCreatorPayload {
-  address: string;
-}
-
-export interface MarketplaceAddressPayload {
-  owner?: string;
-  store?: string;
-  storeConfig?: string;
-}
-interface MarketplaceAuctionHousePayload {
-  address: string;
-}
-export interface MarktplaceSettingsPayload {
-  meta: MarktetplaceMetaPayload;
-  theme: MarketplaceThemePayload;
-  creators: MarketplaceCreatorPayload[];
-  subdomain: string;
-  address: MarketplaceAddressPayload;
-  auctionHouses: MarketplaceAuctionHousePayload[];
 }
 
 export interface Marketplace {
@@ -87,6 +56,7 @@ export interface AuctionHouse {
   treasuryBump: number;
   feePayerBump: number;
   sellerFeeBasisPoints: number;
+  fee: number;
   requiresSignOff: boolean;
   canChangeSalePrice: boolean;
   stats?: MintStats;
@@ -206,7 +176,10 @@ export interface Nft {
   address: string;
   name: string;
   sellerFeeBasisPoints: number;
+  royalties: number;
   mintAddress: string;
+  shortAddress: string;
+  shortMintAddress: string;
   primarySaleHappened: boolean;
   updateAuthorityAddress: string;
   description: string;
@@ -222,9 +195,10 @@ export interface Nft {
   purchases?: Purchase[];
   offers?: Offer[];
   files?: NftFile[];
-  collection?: Nft;
+  collection?: Collection;
   createdAt?: string;
   parser?: string;
+  isDarkblocked?: boolean;
 }
 
 export interface AttributeFilter {
@@ -258,9 +232,11 @@ export interface Activity {
   metadata: string;
   auctionHouse?: AuctionHouse;
   price: BN;
+  solPrice: number;
   createdAt: string;
   wallets: Wallet[];
   activityType: string;
+  marketplaceProgramAddress: string;
   nft?: Nft;
 }
 
@@ -291,6 +267,8 @@ export interface Wallet extends UserWallet {
   connectionCounts: ConnectionCounts;
   compactFollowerCount: string;
   compactFollowingCount: string;
+  compactOwnedCount: string;
+  compactCreatedCount: string;
   portfolioValue: number;
 }
 
@@ -298,6 +276,7 @@ export interface WalletNftCount {
   owned: number;
   offered: number;
   listed: number;
+  created: number;
 }
 
 export interface ConnectionCounts {
@@ -320,7 +299,15 @@ export interface Collection {
   floorPrice: number;
   nftCount: string;
   nft: Nft;
+  activities: Activity[];
   totalVolume: string;
   listedCount: string;
   holderCount: string;
+}
+
+export interface GraphConnection {
+  address: string;
+  connectedAt?: string;
+  from?: Wallet;
+  to?: Wallet;
 }

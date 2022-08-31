@@ -11,6 +11,7 @@ interface ProfileCardProps {
 
 export default function ProfileCard({ wallet, className }: ProfileCardProps): JSX.Element {
   const { t } = useTranslation('profile');
+
   return (
     <div
       className={clsx(
@@ -30,21 +31,14 @@ export default function ProfileCard({ wallet, className }: ProfileCardProps): JS
             alt={`profile avatar for ${wallet.address}`}
             className="relative z-20 -mt-12 h-24 w-24 rounded-full border-2 border-gray-800 bg-gray-800"
           />
-          <Button
-            type={ButtonType.Primary}
-            size={ButtonSize.Small}
-            icon={<PlusIcon width={14} height={14} />}
-          >
-            {t('follow', { ns: 'common' })}
-          </Button>
         </div>
         <h1 className="mt-6 text-xl">{wallet.displayName}</h1>
         <div className="mt-4 flex gap-2 text-white">
           <div className="flex flex-row gap-1">
-            {wallet.compactFollowerCount} <span className="text-gray-300">{t('followers')}</span>
+            {wallet.compactOwnedCount} <span className="text-gray-300">{t('collected')}</span>
           </div>
           <div className="flex flex-row gap-1">
-            {wallet.compactFollowingCount} <span className="text-gray-300">{t('following')}</span>
+            {wallet.compactCreatedCount} <span className="text-gray-300">{t('created')}</span>
           </div>
         </div>
       </div>

@@ -1,8 +1,9 @@
 import { ReactElement } from 'react';
 import { Wallet } from '../types';
-import { PlusIcon, DownloadIcon, RefreshIcon } from '@heroicons/react/outline';
+import { DownloadIcon, RefreshIcon } from '@heroicons/react/outline';
 import { useTranslation } from 'next-i18next';
-import Overview from './../components/Overview';
+import { Overview } from './../components/Overview';
+
 import Button, { ButtonSize, ButtonType } from '../components/Button';
 import Head from 'next/head';
 
@@ -26,16 +27,13 @@ function ProfileLayout({ children, wallet }: ProfileLayout): JSX.Element {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Overview.Container>
+      <Overview>
         <Overview.Hero>
           <Overview.Info
             avatar={<Overview.Avatar src={wallet.previewImage} circle />}
             title={<Overview.Title>{wallet.displayName}</Overview.Title>}
           >
             <Overview.Actions>
-              <Button icon={<PlusIcon width={14} height={14} />} size={ButtonSize.Small}>
-                {t('follow', { ns: 'common' })}
-              </Button>
               <Button
                 circle
                 icon={<DownloadIcon width={14} height={14} />}
@@ -44,8 +42,8 @@ function ProfileLayout({ children, wallet }: ProfileLayout): JSX.Element {
               />
             </Overview.Actions>
             <Overview.Figures>
-              <Overview.Figure figure={wallet.compactFollowerCount} label={t('followers')} />
-              <Overview.Figure figure={wallet.compactFollowingCount} label={t('following')} />
+              <Overview.Figure figure={wallet.compactCreatedCount} label={t('created')} />
+              <Overview.Figure figure={wallet.compactOwnedCount} label={t('collected')} />
             </Overview.Figures>
           </Overview.Info>
           <Overview.Aside>
@@ -72,7 +70,7 @@ function ProfileLayout({ children, wallet }: ProfileLayout): JSX.Element {
         </Overview.Tabs>
         <Overview.Divider />
         {children}
-      </Overview.Container>
+      </Overview>
     </>
   );
 }

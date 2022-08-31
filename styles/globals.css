@@ -3,6 +3,7 @@
 @import 'swiper/css';
 @import 'swiper/css/navigation';
 @import 'swiper/css/grid';
+@import 'darkblock.css';
 
 @tailwind base;
 @tailwind components;
@@ -20,11 +21,10 @@ h6 {
 body,
 html {
   @apply bg-gray-900;
-  overflow-x: hidden;
 }
 
 .wallet-modal-theme .wallet-adapter-modal-wrapper {
-  @apply bg-gray-900 font-sans;
+  @apply font-sans bg-gray-900;
 }
 
 .wallet-modal-theme .wallet-adapter-button:not([disabled]):hover {
@@ -37,17 +37,4 @@ html {
 
 .swiper-button-disabled {
   @apply opacity-0;
-}
-::-webkit-scrollbar {
-  width: 12px;
-  border:0px;
-}
-::-webkit-scrollbar-track {
-  
-    border:0px;
-}
-::-webkit-scrollbar-thumb {
-  background: #fff; 
-  border-radius: 10px;
-    border:0px;
 }
