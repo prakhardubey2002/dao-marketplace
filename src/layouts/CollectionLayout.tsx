@@ -1,8 +1,8 @@
 import { ReactElement } from 'react';
 import { Collection } from '../types';
-import { DownloadIcon, RefreshIcon } from '@heroicons/react/outline';
+import { PlusIcon, DownloadIcon, RefreshIcon } from '@heroicons/react/outline';
 import { useTranslation } from 'next-i18next';
-import { Overview } from './../components/Overview';
+import Overview from './../components/Overview';
 import Button, { ButtonSize, ButtonType } from '../components/Button';
 import Head from 'next/head';
 
@@ -23,13 +23,16 @@ function CollectionLayout({ children, collection }: CollectionLayoutProps): JSX.
         <meta name="description" content={collection.nft.description} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Overview>
+      <Overview.Container>
         <Overview.Hero>
           <Overview.Info
             avatar={<Overview.Avatar src={collection.nft.image} />}
             title={<Overview.Title>{collection.nft.name}</Overview.Title>}
           >
             <Overview.Actions>
+              <Button icon={<PlusIcon width={14} height={14} />} size={ButtonSize.Small}>
+                {t('follow', { ns: 'common' })}
+              </Button>
               <Button
                 circle
                 icon={<DownloadIcon width={14} height={14} />}
@@ -72,7 +75,7 @@ function CollectionLayout({ children, collection }: CollectionLayoutProps): JSX.
         </Overview.Tabs>
         <Overview.Divider />
         {children}
-      </Overview>
+      </Overview.Container>
     </>
   );
 }

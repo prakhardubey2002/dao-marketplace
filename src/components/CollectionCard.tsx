@@ -11,27 +11,26 @@ export default function CollectionCard({ collection }: CollectionCardProps): JSX
   const { t } = useTranslation(['collection', 'common']);
 
   return (
-    <div className="relative flex aspect-square w-full flex-col justify-end overflow-hidden rounded-lg shadow-lg transition hover:scale-[1.02]">
+    <article className="relative flex aspect-square w-full flex-col justify-end overflow-hidden rounded-lg shadow-lg transition hover:scale-[1.02]">
       <img
         src={collection.nft.image}
         className="absolute top-0 left-0 -z-10 h-full w-full object-cover"
-        alt={`Collection ${collection.nft.name}`}
       />
       <div className="pointer-events-none absolute z-10 h-full w-full bg-gradient-to-b from-transparent to-gray-900/80" />
       <h1 className="z-20 px-4 text-3xl">{collection.nft.name}</h1>
-      <div className="z-20 grid w-full grid-cols-2 gap-2 p-4 text-white">
+      <footer className="z-20 grid w-full grid-cols-2 gap-2 p-4 text-white">
         <div className="rounded-lg bg-gray-800 bg-opacity-50 p-2 text-center text-sm backdrop-blur-md xl:text-base">
           {t('card.count', { amount: collection.nftCount })}
         </div>
         <div className="rounded-lg bg-gray-800 bg-opacity-50 p-2 text-center text-sm backdrop-blur-md xl:text-base">
           {t('card.floor', { price: collection.floorPrice })}
         </div>
-      </div>
-    </div>
+      </footer>
+    </article>
   );
 }
 
-export interface CollectionCardSkeletonProps {
+interface CollectionCardSkeletonProps {
   className?: string;
 }
 

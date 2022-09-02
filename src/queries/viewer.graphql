@@ -1,7 +1,6 @@
 query GetViewerQuery($address: PublicKey!) {
   wallet(address: $address) {
     address
-    previewImage @client
     profile {
       profileImageUrlHighres
       handle

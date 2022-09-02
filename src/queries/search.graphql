@@ -1,4 +1,4 @@
-#import "./fragments/profile.graphql"
+#import "./fragments/ProfileInfo.graphql"
 
 query search($term: String!, $walletAddress: PublicKey!, $nftMintAddress: PublicKey!) {
   profiles(term: $term, limit: 5, offset: 0) {
