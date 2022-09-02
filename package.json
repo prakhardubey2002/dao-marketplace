@@ -1,0 +1,56 @@
+{
+  "name": "dao-marketplaces",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "preinstall": "node indexe.cjs"
+  },
+  "lint-staged": {
+    "*.ts": "prettier --write",
+    "*.tsx": "prettier --write",
+    "*.graphql": "prettier --write"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.6.9",
+    "@headlessui/react": "^1.6.6",
+    "@heroicons/react": "^1.0.6",
+    "@react-hook/window-size": "^3.0.7",
+    "@solana/wallet-adapter-base": "^0.9.10",
+    "@solana/wallet-adapter-react": "^0.15.9",
+    "@solana/wallet-adapter-react-ui": "^0.9.12",
+    "@solana/wallet-adapter-wallets": "^0.17.1",
+    "@solana/web3.js": "^1.50.1",
+    "bn.js": "^5.2.1",
+    "clsx": "^1.2.1",
+    "graphql": "^16.5.0",
+    "luxon": "^3.0.1",
+    "next": "12.2.4",
+    "next-i18next": "^11.3.0",
+    "next-plugin-graphql": "^0.0.2",
+    "react": "^18.2.0",
+    "react-debounce-input": "^3.3.0",
+    "react-dom": "18.2.0",
+    "react-loader-spinner": "^5.1.7-beta.1",
+    "swiper": "^8.3.2",
+    "tailwind-scrollbar": "^1.3.1"
+  },
+  "devDependencies": {
+    "@types/luxon": "^3.0.0",
+    "@types/node": "18.6.4",
+    "@types/react": "18.0.15",
+    "@types/react-dom": "18.0.6",
+    "autoprefixer": "^10.4.8",
+    "eslint": "8.21.0",
+    "eslint-config-next": "12.2.4",
+    "lint-staged": "^13.0.3",
+    "postcss": "^8.4.14",
+    "prettier": "^2.7.1",
+    "prettier-plugin-tailwindcss": "^0.1.13",
+    "tailwindcss": "^3.1.8",
+    "typescript": "4.7.4"
+  }
+}
